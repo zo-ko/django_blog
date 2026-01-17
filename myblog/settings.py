@@ -128,3 +128,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# QQ邮箱 SMTP 服务器
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 465  # 或者 587
+EMAIL_USE_SSL = True  # 如果端口是465，设置为True；如果是587，设置为False并使用TLS
+# EMAIL_USE_TLS = True  # 如果端口是587，设置为True
+EMAIL_HOST_USER = '3087789206@qq.com'  # 你的QQ邮箱
+EMAIL_HOST_PASSWORD = 'xptkrjexzxdkdccj'  # 在QQ邮箱设置中生成的授权码
+DEFAULT_FROM_EMAIL = '3087789206@qq.com'  # 默认发件人
