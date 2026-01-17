@@ -1,4 +1,56 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
+
+{% block titlename %}
+    博客详情
+{% endblock titlename %}
+
+
+{% block main %}
+    h1>博客详情</h1>
+    <hr>
+    <div class="mt-2">
+        <img src="{% static 'image/09ab4b5b67414596b74f62378ea65489.jpg' %}" height="40" class="rounded-circle" alt="">
+        <span class="ms-2">zoko</span>
+        <span class="ms-2">于</span>
+        <span class="ms-2">2025-1-1 11:29 发布</span>
+    </div>
+    <hr>
+    <div class="py-2">
+        这是博客详情
+    </div>
+    <hr>
+    <div class="mt-2">
+        <h3>评论(10):</h3>
+        <form action="",method='POST'>
+            <div class="mt-2">
+                <input type="text" class="form-control" placeholder="输入评论">
+            </div>
+            <div class="text-end mt-2">
+                <button type="button" class="btn btn-outline-secondary">Secondary</button>
+            </div>
+            <div class="mt-2">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="user-info d-flex align-items-center">
+                            <img src="{% static 'image/09ab4b5b67414596b74f62378ea65489.jpg' %}" height="50" class="rounded-circle" alt="">
+                            <span class="ms-2">koko</span>
+                            <div class="create_time ms-auto text-body-secondary">
+                                2024-1-1 11:11
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            评论内容
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+        </form>
+    </div>
+{% endblock main %}
+    
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -77,4 +129,4 @@
     </div>
 </main>
 </body>
-</html>
+</html> {% endcomment %}
