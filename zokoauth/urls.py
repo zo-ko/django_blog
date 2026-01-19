@@ -4,5 +4,6 @@ app_name='zokoauth'
 urlpatterns = [
     path('register',views.user_rigister,name='register'),
     path('login',views.user_login,name='login'),
-    path('send_email',views.send_email_captche)
+    path('send_email',views.send_email_captche),
+    path('logout',views.user_logout,name='logout')
 ]

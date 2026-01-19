@@ -35,10 +35,28 @@
           <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
         </form>
 
-        <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
-        </div>
+        
+        {% if user.is_authenticated %}
+            <div class="dropdown text-end">
+              <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{% static 'image/09ab4b5b67414596b74f62378ea65489.jpg' %}" alt="mdo" width="32" height="32" class="rounded-circle">
+              </a>
+              <ul class="dropdown-menu text-small">
+                <li><a class="dropdown-item" href="{% url 'zokoauth:logout' %}">Sign out</a></li>
+              </ul>
+            </div>
+        {% else %}
+            <div class="text-end">
+              <a href="{% url 'zokoauth:login' %}" type="button" class="btn btn-outline-light me-2">Login</a>
+              <a href="{% url 'zokoauth:register' %}" type="button" class="btn btn-warning">Sign-up</a>
+            </div>
+        {% endif %}
+          
+
+        {% comment %} <div class="text-end">
+          <a href="{% url 'zokoauth:login' %}" type="button" class="btn btn-outline-light me-2">Login</a>
+          <a href="{% url 'zokoauth:register' %}" type="button" class="btn btn-warning">Sign-up</a>
+        </div> {% endcomment %}
       </div>
     </div>
   </header>

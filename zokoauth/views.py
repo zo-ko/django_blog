@@ -1,12 +1,12 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.urls import reverse
-
+from django.views.decorators.http import require_http_methods
 from django.http.response import JsonResponse
 import random
 from django.core.mail import send_mail
 from .models import captchamodel
-from .forms import registerform
-from django.contrib.auth import get_user_model
+from .forms import registerform,loginform
+from django.contrib.auth import get_user_model,login,logout
 # Create your views here.
 
 user=get_user_model()
@@ -20,14 +20,40 @@ def user_rigister(request):
             email=form.cleaned_data.get('email')
             username=form.cleaned_data.get('username')
             password=form.cleaned_data.get('password')
-            user.objects.create(email=email,username=username,password=password)
+            user.objects.create_user(email=email,username=username,password=password)
             return redirect(reverse('zokoauth:login'))
         else:
             print(form.errors)
             return redirect(reverse('zokoauth:register'))
-def user_login(request):
-    return render(request,'login.html')
+        
 
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('blog:index'))
+        
+@require_http_methods(['GET','POST'])
+def user_login(request):
+    if request.method=='GET':
+        return render(request,'login.html')
+    else:
+        form=loginform(request.POST)
+        if form.is_valid():
+            email=form.cleaned_data.get('email')
+            password=form.cleaned_data.get('password')
+            remember=form.cleaned_data.get('remember')
+            use=user.objects.filter(email=email).first()
+            if use and use.check_password(password):
+            #     return HttpResponse(use.username)
+            # else:
+            #     return HttpResponse(use.username)
+                login(request,use)
+                if not remember:
+                    request.session.set_expiry(0)
+                
+                return redirect(reverse('blog:index'))
+            else:
+                print('邮箱或者密码错误')
+                return redirect(reverse('zokoauth:login'))
 def send_email_captche(request):
     email=request.GET.get('email')
     if not email:
